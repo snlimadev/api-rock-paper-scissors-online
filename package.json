@@ -1,0 +1,13 @@
+{
+  "name": "api-rock-paper-scissors-online",
+  "version": "1.0.0",
+  "description": "A Node.js WebSocket server for a rock paper scissors online game",
+  "main": "api/game/index.js",
+  "scripts": {
+    "start": "node api/game/index.js"
+  },
+  "dependencies": {
+    "ws": "^8.14.2"
+  },
+  "license": "MIT"
+}
