@@ -4,7 +4,7 @@ const server = new WebSocket.Server({ port: 8080 });
 const lobbyRoomCode = 'Lobby';
 const rooms = {};
 
-const gameFunctions = require('./Functions');
+const gameFunctions = require('./services');
 
 server.on('connection', (socket) => {
   socket.on('message', (message) => {
