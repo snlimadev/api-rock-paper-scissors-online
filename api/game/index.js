@@ -49,28 +49,24 @@ server.on('connection', (socket) => {
       }
     }
     //#endregion
+  });
 
-    if (socket.readyState === WebSocket.OPEN) {
-      socket.removeAllListeners('close');
-    }
-
+  socket.on('close', () => {
     //#region Handle client disconnection
     // Lida com desconexões do cliente
-    socket.on('close', () => {
-      if (rooms[lobbyRoomCode]) {
-        if (rooms[lobbyRoomCode].clients.has(socket)) {
-          rooms[lobbyRoomCode].clients.delete(socket);
-        }
-
-        if (rooms[lobbyRoomCode].clients.size === 0) {
-          delete rooms[lobbyRoomCode];
-        }
+    if (rooms[lobbyRoomCode]) {
+      if (rooms[lobbyRoomCode].clients.has(socket)) {
+        rooms[lobbyRoomCode].clients.delete(socket);
       }
 
-      gameFunctions.deleteGameRoom(
-        socket, rooms, lobbyRoomCode
-      );
-    });
+      if (rooms[lobbyRoomCode].clients.size === 0) {
+        delete rooms[lobbyRoomCode];
+      }
+    }
+
+    gameFunctions.deleteGameRoom(
+      socket, rooms, lobbyRoomCode
+    );
     //#endregion
   });
 });
