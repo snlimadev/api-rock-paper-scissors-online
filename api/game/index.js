@@ -69,6 +69,8 @@ server.on('connection', (socket) => {
     );
     //#endregion
   });
+
+  socket.on('error', console.error);
 });
 
 server.on('listening', () => {
