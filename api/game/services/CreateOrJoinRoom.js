@@ -26,7 +26,7 @@ function createOrJoinRoom(socket, rooms, parsedMessage, lobbyRoomCode) {
   } else {
     //#region Create a new room or prevent user joining an inexistent one
     // Cria uma nova sala ou impede que o usuário entre em uma que não existe
-    if (parsedMessage.action === 'create' && roomCode) {
+    if (parsedMessage.action === 'create' && roomCode > 0) {
       rooms[roomCode] = {
         clients: new Set(),
         isPublic: isPublic,
@@ -57,7 +57,7 @@ function createOrJoinRoom(socket, rooms, parsedMessage, lobbyRoomCode) {
     if (socket.readyState === WebSocket.OPEN) {
       socket.send(JSON.stringify({
         error: 'Failed to create room. ' +
-          'Required to inform room code, which must be an integer.'
+          'Required to inform room code, which must be a positive integer.'
       }));
     }
 
@@ -76,21 +76,10 @@ function createOrJoinRoom(socket, rooms, parsedMessage, lobbyRoomCode) {
     return;
   }
 
-  // Validate and attach room code and user to the socket
-  // Valida e vincula o código da sala e o usuário ao socket
-  if (roomCode && user) {
-    socket.roomCode = roomCode;
-    socket.user = user;
-  } else {
-    if (socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify({
-        error: 'Required to inform room code.'
-      }));
-    }
-
-    return;
-  }
-  //#endregion
+  // Attach room code and user to the socket
+  // Vincula o código da sala e o usuário ao socket
+  socket.roomCode = roomCode;
+  socket.user = user;
 
   // Add user to the room
   // Adiciona o usuário à sala

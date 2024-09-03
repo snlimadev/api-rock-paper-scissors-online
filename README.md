@@ -8,7 +8,7 @@ Besides game functionality, it features a lobby system, where users can create a
 
 &middot; action: Specify 'create' to create a new room, 'join' to enter an existing room or 'getRooms' to obtain a list of available public rooms.
 <br/>
-&middot; roomCode: Unique code for the game room. Must be an integer.
+&middot; roomCode: Unique code for the game room. Must be a positive integer.
 <br/>
 &middot; isPublic: Specify 'Y' to make the room visible in the lobby, or 'N' to make the room private.
 <br/>
@@ -38,7 +38,7 @@ Além das funcionalidades de jogo, ele conta com um sistema de lobby, onde os us
 
 &middot; action: Especifique 'create' para criar uma nova sala, 'join' para entrar em uma sala existente ou 'getRooms' para obter uma lista de salas públicas disponíveis.
 <br/>
-&middot; roomCode: Código único da sala de jogo. Deve ser um número inteiro.
+&middot; roomCode: Código único da sala de jogo. Deve ser um número inteiro positivo.
 <br/>
 &middot; isPublic: Especifique 'Y' para tornar a sala visível no lobby, ou 'N' para torná-la privada.
 <br/>

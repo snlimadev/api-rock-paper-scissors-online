@@ -7,30 +7,32 @@ function handleGameRounds(socket, rooms, parsedMessage) {
   const move = parsedMessage.move.toString().trim().toUpperCase();
   const validMoves = ['ROCK', 'PAPER', 'SCISSORS'];
 
-  if (move) {
-    if (!validMoves.includes(move)) {
-      if (socket.readyState === WebSocket.OPEN) {
-        socket.send(JSON.stringify({
-          error: 'Invalid move.'
-        }));
-      }
-
-      return;
+  if (!rooms[socket.roomCode]) {
+    if (socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify({
+        error: 'You must enter a room to make a move.'
+      }));
     }
 
-    if (
-      socket.user === 'PLAYER 1' &&
-      !rooms[socket.roomCode].state.player1Move
-    ) {
-      rooms[socket.roomCode].state.player1Move = move;
+    return;
+  }
+
+  if (!validMoves.includes(move)) {
+    if (socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify({
+        error: 'Invalid move.'
+      }));
     }
 
-    if (
-      socket.user === 'PLAYER 2' &&
-      !rooms[socket.roomCode].state.player2Move
-    ) {
-      rooms[socket.roomCode].state.player2Move = move;
-    }
+    return;
+  }
+
+  if (socket.user === 'PLAYER 1' && !rooms[socket.roomCode].state.player1Move) {
+    rooms[socket.roomCode].state.player1Move = move;
+  }
+
+  if (socket.user === 'PLAYER 2' && !rooms[socket.roomCode].state.player2Move) {
+    rooms[socket.roomCode].state.player2Move = move;
   }
 
   if (

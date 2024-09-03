@@ -1,7 +1,7 @@
-const { sendAvailableRooms } = require('./SendAvailableRooms');
 const { checkWinner } = require('./CheckWinner');
+const { sendAvailableRooms } = require('./SendAvailableRooms');
 
 module.exports = {
-  sendAvailableRooms,
-  checkWinner
+  checkWinner,
+  sendAvailableRooms
 };
