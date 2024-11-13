@@ -42,24 +42,24 @@ function handleMessage(socket, rooms, lobbyRoomCode, message) {
 }
 
 function handleClose(socket, rooms, lobbyRoomCode) {
-  gameServices.removeFromLobby(socket, rooms, lobbyRoomCode);
-  gameServices.deleteGameRoom(socket, rooms, lobbyRoomCode);
+  try {
+    gameServices.removeFromLobby(socket, rooms, lobbyRoomCode);
+    gameServices.deleteGameRoom(socket, rooms, lobbyRoomCode);
+  } catch (error) {
+    console.error('Error handling close event: ', error);
+  }
 }
 
 function handleConnection(socket, rooms, lobbyRoomCode) {
-  try {
-    socket.on('message', (message) => {
-      handleMessage(socket, rooms, lobbyRoomCode, message);
-    });
+  socket.on('message', (message) => {
+    handleMessage(socket, rooms, lobbyRoomCode, message);
+  });
 
-    socket.on('close', () => {
-      handleClose(socket, rooms, lobbyRoomCode);
-    });
+  socket.on('close', () => {
+    handleClose(socket, rooms, lobbyRoomCode);
+  });
 
-    socket.on('error', console.error);
-  } catch (error) {
-    console.error('Error handling connection event: ', error);
-  }
+  socket.on('error', console.error);
 }
 
 module.exports = { handleConnection };
