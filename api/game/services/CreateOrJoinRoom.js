@@ -8,6 +8,19 @@ function createOrJoinRoom(socket, rooms, parsedMessage, lobbyRoomCode) {
   const user = (parsedMessage.action === 'create') ? 'PLAYER 1' : 'PLAYER 2';
   const isPublic = (parsedMessage.isPublic === 'Y') ? true : false;
 
+  //#region Check if the client is already in a room
+  // Verifica se o cliente já está em uma sala
+  if (socket.roomCode) {
+    if (socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify({
+        error: 'You are already in a room.'
+      }));
+    }
+
+    return;
+  }
+  //#endregion
+
   //#region Handle room creation
   // Lida com a criação de salas
   if (rooms[roomCode]) {
