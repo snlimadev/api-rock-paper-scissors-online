@@ -27,12 +27,32 @@ function handleGameRounds(socket, rooms, parsedMessage) {
     return;
   }
 
-  if (socket.user === 'PLAYER 1' && !rooms[socket.roomCode].state.player1Move) {
-    rooms[socket.roomCode].state.player1Move = move;
+  if (socket.user === 'PLAYER 1') {
+    if (!rooms[socket.roomCode].state.player1Move) {
+      rooms[socket.roomCode].state.player1Move = move;
+    } else {
+      if (socket.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify({
+          error: 'You have already made your move.'
+        }));
+      }
+
+      return;
+    }
   }
 
-  if (socket.user === 'PLAYER 2' && !rooms[socket.roomCode].state.player2Move) {
-    rooms[socket.roomCode].state.player2Move = move;
+  if (socket.user === 'PLAYER 2') {
+    if (!rooms[socket.roomCode].state.player2Move) {
+      rooms[socket.roomCode].state.player2Move = move;
+    } else {
+      if (socket.readyState === WebSocket.OPEN) {
+        socket.send(JSON.stringify({
+          error: 'You have already made your move.'
+        }));
+      }
+
+      return;
+    }
   }
 
   if (
