@@ -100,7 +100,7 @@ function createOrJoinRoom(socket, rooms, parsedMessage, lobbyRoomCode) {
 
   // Update available rooms list
   // Atualiza a lista de salas disponíveis
-  if (rooms[lobbyRoomCode]) {
+  if (rooms[lobbyRoomCode] && rooms[roomCode].isPublic) {
     rooms[lobbyRoomCode].clients.forEach((client) => {
       sendAvailableRooms(client, rooms);
     });
