@@ -26,7 +26,7 @@ Besides game functionality, it features a lobby system, where users can create a
 
 <h4>WebSocket Connection URL</h4>
 
-wss://api-rock-paper-scissors-online.glitch.me
+wss://api-rock-paper-scissors-online.onrender.com
 
 <h2>Português</h2>
 
@@ -56,4 +56,4 @@ Além das funcionalidades de jogo, ele conta com um sistema de lobby, onde os us
 
 <h4>URL de Conexão WebSocket</h4>
 
-wss://api-rock-paper-scissors-online.glitch.me
+wss://api-rock-paper-scissors-online.onrender.com
