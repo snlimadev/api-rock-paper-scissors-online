@@ -1,5 +1,12 @@
-//#region Function to check winner
-// Função para verificar o vencedor
+/**
+ * Checks the winner.
+ * 
+ * @param {string} player1Move - `ROCK`, `PAPER`, or `SCISSORS`.
+ * @param {string} player2Move - `ROCK`, `PAPER`, or `SCISSORS`.
+ * 
+ * @returns {object} Returns an object containing the properties `winner`
+ * (`DRAW`, `PLAYER 1`, or `PLAYER 2`) and `description` (string).
+ */
 function checkWinner(player1Move, player2Move) {
   let winner = '';
   let description = '';
@@ -21,6 +28,5 @@ function checkWinner(player1Move, player2Move) {
 
   return { winner, description };
 }
-//#endregion
 
 module.exports = { checkWinner };

@@ -1,8 +1,15 @@
 const WebSocket = require('ws');
 const { sendAvailableRooms } = require('./utils');
 
-//#region Function to delete a game room
-// Função para excluir uma sala de jogo
+/**
+ * Deletes the game room where the client is in.
+ * 
+ * @param {object} socket - The WebSocket connection object.
+ * @param {object} rooms - An object containing all active rooms on the server.
+ * @param {string} lobbyRoomCode - The lobby room code.
+ * 
+ * @returns {void} This function does not return any value.
+ */
 function deleteGameRoom(socket, rooms, lobbyRoomCode) {
   let shouldUpdateLobby = false;
 
@@ -31,6 +38,5 @@ function deleteGameRoom(socket, rooms, lobbyRoomCode) {
     }
   }
 }
-//#endregion
 
 module.exports = { deleteGameRoom };

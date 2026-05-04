@@ -1,7 +1,13 @@
 const WebSocket = require('ws');
 
-//#region Function to send the list of available rooms
-// Função para enviar a lista de salas disponíveis
+/**
+ * Sends the list of available rooms to the client.
+ * 
+ * @param {object} socket - The WebSocket connection object.
+ * @param {object} rooms - An object containing all active rooms on the server.
+ * 
+ * @returns {void} This function does not return any value.
+ */
 function sendAvailableRooms(socket, rooms) {
   const availableRooms = Object.keys(rooms)
     .filter(
@@ -15,6 +21,5 @@ function sendAvailableRooms(socket, rooms) {
     }));
   }
 }
-//#endregion
 
 module.exports = { sendAvailableRooms };
