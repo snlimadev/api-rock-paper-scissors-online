@@ -20,6 +20,8 @@ server.on('close', () => {
   clearInterval(interval);
 });
 
+server.on('error', console.error);
+
 server.on('listening', () => {
   console.log(`WebSocket server is running on port ${server.options.port}`);
 });

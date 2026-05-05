@@ -107,17 +107,21 @@ function handleConnection(socket, rooms, lobbyRoomCode) {
  * @returns {void} This function does not return any value.
  */
 function handlePing(socket) {
-  if (socket.readyState !== WebSocket.OPEN || !socket.isAlive) {
-    socket.terminate();
-    return;
-  }
-
-  socket.isAlive = false;
-
   try {
-    socket.ping();
-  } catch {
-    socket.terminate();
+    if (socket.readyState !== WebSocket.OPEN || !socket.isAlive) {
+      socket.terminate();
+      return;
+    }
+
+    socket.isAlive = false;
+
+    try {
+      socket.ping();
+    } catch {
+      socket.terminate();
+    }
+  } catch (error) {
+    console.error('Error handling ping: ', error);
   }
 }
 
